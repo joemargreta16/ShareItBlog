@@ -149,6 +149,7 @@
                                                 </div>
                                                 <p>{{ comment.content|capfirst }}</p>
 
+                                                {% if user.is_authenticated %}
                                                 <button type="button" class="btn btn-info btn-sm" onclick="commentReplyToggle('{{ comment.pk }}')">Reply</button>
                                                 <div class="row justify-content-center mt-6 mb-5 d-none" id="{{ comment.pk }}">
                                                     <div class="col-md-10 col-sm-12">
@@ -163,10 +164,11 @@
                                                         </form>
                                                     </div>
                                                 </div>
+                                                {% endif %}
                                                 <hr>
                                             </div>
                                         </div>
-
+                                        <!-- reply -->
                                         {% for child_comment in comment.children %}
                                         <div>
                                             <div class="media-body" style="margin-left: 6rem;">
@@ -184,6 +186,7 @@
                                             </div>
                                         </div>
                                         {% endfor %}
+                                        <!-- end of reply -->
                                         {% endif %}
                                         {% endfor %}
                                     </div>
