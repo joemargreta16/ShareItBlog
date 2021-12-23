@@ -1,0 +1,40 @@
+{% include 'pages/base.html' %}
+
+{% block content %}
+
+<div class="mx-auto pt-2">
+    {% include 'blog/header.html' %}
+</div>
+
+<main class="main-content">
+    <div class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-xl-8">
+                    <!-- home posts -->
+                    <div class="row gap-y">
+                        {% include 'blog/home_posts.html' %}
+                    </div>
+                    <!-- pagination -->
+                    {% include 'blog/pagination.html' %}
+                </div>
+                <!-- side bar -->
+                <div class="col-lg-4 col-xl-4 position-sticky">
+                    <div class="card mb-6">
+                        <!-- search -->
+                        {% include 'blog/search.html' %}
+                        <!-- categories -->
+                        {% include 'blog/categories.html' %}
+                        <!-- top blog -->
+                        {% include 'blog/top_posts.html' %}
+                        <!-- about -->
+                        {% include 'blog/about.html' %}
+                    </div>
+                </div>
+                <!-- end of side bar -->
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

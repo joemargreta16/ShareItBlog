@@ -1,0 +1,53 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        {% url 'home' as home %}
+        <a class="navbar-brand" href="{% url 'pages:home' %}">ShareItBlog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% url 'post_blog_page' as post_blog_page %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post_blog_page' %}">Compose blog</a>
+                </li>
+            </ul>
+
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item dropdown float-end">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img class="avatar"
+                            style="vertical-align: middle; width: 2rem; height: 2rem; border-radius: 50%; padding: 5px;"
+                            src="{{ request.user.profile.avatar.url }}" alt="This is image...">
+                        <span>Welcome to "ShareItBlog",&nbsp;<strong>{{ request.user }}</strong></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% url 'my_profile' as my_profile %}
+                        <li><a class="dropdown-item" href="{% url 'pages:my_profile' %}">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pages:change-password' %}">Change Password</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            {% else %}
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-info mr-2 mb-2" href="{% url 'account_login' %}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success mr-2" href="{% url 'account_signup' %}">Sign Up</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

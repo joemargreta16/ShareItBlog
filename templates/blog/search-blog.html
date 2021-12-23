@@ -1,0 +1,69 @@
+{% include "pages/base.html" %}
+
+{% block content %}
+<br><br>
+{% include 'blog/header-search-result.html' %}
+
+<main class="main-content">
+    <div class="section bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-xl-8">
+                    <!-- home posts -->
+                    <div class="row gap-y">
+                        {% include 'blog/home_posts.html' %}
+                    </div>
+                    <!-- pagination -->
+                    <div class="d-flex justify-content-center">
+                        <ul class="pagination">
+                            {% if posts.has_previous %}
+                            <li class="page-item"><a href="?search={{ query }}&page={{ posts.previous_page_number }}" class="page-link"><< Previews</a></li>
+                            {% else %}
+                            <li class="page-item disabled"><a href="#" class="page-link"><< Previews</a></li>
+                            {% endif %}
+
+                            {% if 3 in posts.paginator.page_range %}
+                            {% if page|add:'-1' >= 1 %}
+                            <li class="page-item"><a href="?search={{ query }}&page={{ page|add:'-1' }}" class="page-link"> {{ page|add:'-1' }} </a></li>
+                            {% endif %}
+
+                            <li class="page-item"><a href="?search={{ query }}&page={{ page }}" class="page-link"> {{ page }} </a></li>
+
+                            {% if page|add:'1' in posts.paginator.page_range %}
+                            <li class="page-item"><a href="?search={{ query }}&page={{ page|add:'1' }}" class="page-link"> {{ page|add:'1' }} </a></li>
+                            {% endif %}
+
+                            {% else %}
+                            {% for number in posts.paginator.page_range %}
+                            <li class="page-item"><a href="?search={{ query }}&page={{ number }}" class="page-link"> {{ number }} </a></li>
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if posts.has_next %}
+                            <li class="page-item"><a href="?search={{ query }}&page={{ posts.next_page_number }}" class="page-link">Next >></a></li>
+                            {% else %}
+                            <li class="page-item disabled"><a href="#" class="page-link">Next >></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- side bar -->
+                <div class="col-lg-4 col-xl-4 position-sticky">
+                    <div class="card mb-6">
+                        <!-- search -->
+                        {% include 'blog/search.html' %}
+                        <!-- categories -->
+                        {% include 'blog/categories.html' %}
+                        <!-- top blog -->
+                        {% include 'blog/top_posts.html' %}
+                        <!-- about -->
+                        {% include 'blog/about.html' %}
+                    </div>
+                </div>
+                <!-- end of side bar -->
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

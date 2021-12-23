@@ -1,0 +1,14 @@
+<h6 class="card-header">
+    Search
+</h6>
+<div class="card-body">
+    <div class="input-group">
+        <form class="input-group" action="{% url 'search' %}" method="GET" role="form">
+            <div class="input-group rounded">
+                <input type="text" name="search" id="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+                <span class="input-group-text btn btn-primary"><i class="fas fa-search">Go!</i></span>
+            </div>
+        </form>
+    </div>
+</div>
+
