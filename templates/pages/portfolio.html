@@ -1,1 +1,66 @@
-<h1>My portfolio</h1>
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- custom CSS-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> {% block custom_css %}{% endblock custom_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/f77049314d.js" crossorigin="anonymous"></script>
+
+    <title>ShareItBlog | Joemar T. Greta</title>
+</head>
+
+<body>
+    {% include 'pages/navbar.html' %}
+    <div class="portfolio-body">
+        <div class="portfolio-container">
+            <div class="left-side">
+                <div class="profile">
+                    <div class="profile-img">
+                        <img src="{% static 'profile_img.png' %}" alt="">
+                    </div>
+                    <h2>Joemar T. Greta<br><span>Web Dev</span></h2>
+                </div>
+                <div class="contact">
+                    <h2 class="title">Contact me</h2>
+                    <ul>
+                        <li>
+                            <span class="icon"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                            <span class="text">+639452209284</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fab fa-facebook-f"></i></span>
+                            <span class="text">facebook.com/joemar.greta</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fab fa-linkedin-in"></i></span>
+                            <span class="text">linkedin.com/me</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fas fa-envelope"></i></span>
+                            <span class="text">joemar.greta16@gmail.com</span>
+                        </li>
+                        <li>
+                            <span class="icon"><i class="fa fa-map-marker"></i></span>
+                            <span class="text">209 Gana Compound Barangay Unang Sigaw Balintawak Q.C.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-side"></div>
+        </div>
+    </div>
+    {% include 'pages/scripts.html' %}
+</body>
+</html>
