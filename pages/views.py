@@ -62,6 +62,9 @@ def my_profile(request):
 def password_success(request):
     return render( request, 'pages/password_success.html' )
 
+def portfolio(request):
+    return render( request, 'pages/portfolio.html' )
+
 @login_required
 def update_profile(request):
     profile = Profile.objects.get( user=request.user )
