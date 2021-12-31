@@ -27,7 +27,7 @@
     grid-template-columns: 1fr 2fr;
     box-shadow: 0 35px 55px rgba(0,0,0,0.1);
 }
-
+/* left side */
 .portfolio-container .left-side{
     position: relative;
     background: #292D3E;
@@ -79,14 +79,14 @@
     padding-top: 40px;
 }
 
-.title{
+.title1{
     color: #fff;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
     margin-bottom: 20px;
 }
-
+/* contact */
 .contact ul{
     position: relative;
 }
@@ -112,9 +112,59 @@
 .contact ul li .text{
     font-size: 15px;
 }
+/* education */
+.contact.education{
+    margin-bottom: 15px;
+}
 
+.contact.education h5{
+    color: #e3a9f4;
+    font-weight: 500;
+}
+
+.contact.education h4:nth-child(1){
+    color: #fff;
+    font-weight: 500;
+}
+
+.contact.education h4{
+    color: #fff;
+    font-weight: 300;
+}
+/* language */
+.contact.language .percent{
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: #081921;
+    display: block;
+    margin-top: 5px;
+}
+
+.contact.language .percent div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #e3a9f4;
+}
+/* right side */
 .portfolio-container .right-side{
     position: relative;
     background: #fff;
     padding: 40px;
+}
+.about{
+    margin-bottom: 50px;
+}
+
+.about:last-child{
+    margin-bottom: 0;
+}
+
+.title2{
+    color: #1B1E2B;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
