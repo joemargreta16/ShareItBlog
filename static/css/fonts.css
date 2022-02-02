@@ -1,0 +1,41 @@
+/* font-famil Abel */
+@font-face{
+    font-family: Abel;
+    src:url('../fonts/Abel/Abel-Regular.ttf')
+}
+
+/* font-famil Lato */
+@font-face{
+    font-family: Lato;
+    src:url('../fonts/Lato/Lato-Regular.ttf')
+}
+
+/* font-famil Montserrat */
+@font-face{
+    font-family: Montserrat;
+    src:url('../fonts/Montserrat/Montserrat-Regular.ttf')
+}
+
+/* font-famil Montserrat-Bold */
+@font-face{
+    font-family: Montserrat-Bold;
+    src:url('../fonts/Montserrat/Montserrat-Bold.ttf')
+}
+
+/* font-famil Open_Sans */
+@font-face{
+    font-family: Open_Sans;
+    src:url('../fonts/Open_Sans/OpenSans-Regular.ttf')
+}
+
+/* font-famil Oswaid */
+@font-face{
+    font-family: Oswaid;
+    src:url('../fonts/Abel/Abel-Regular.ttf')
+}
+
+/* font-famil Roboto */
+@font-face{
+    font-family: Robotto;
+    src:url('../fonts/Roboto/Roboto-Regular.ttf')
+}

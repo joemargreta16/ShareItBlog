@@ -6,245 +6,267 @@
 {% block title %} | My Blog{% endblock title %}
 
 {% block content %}
-<main class="main-content">
-    <div class="section bg-gray mt-8">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-xl-8">
-                    <div class="row gap-y">
-                        <div class="col-md-9">
-                            <!-- blog content -->
-                            <h2>{{ post.title }}</h2>
-                            <p>
-                            <img src="{{ post.author.profile.avatar.url }}" alt="" style="width:30px;height:30px;" class="avatar rounded-pill img-fluid mr-3">Author:&nbsp;{{ post.author }}
-                            </p>
-                            <p>
-                                Published on:&nbsp;{{ post.created_at|date }} | {{ post.created_at|timesince }}&nbsp;ago
-                            <br/>
-                                Categories:&nbsp; 
-                                
-                                    {% for category in post.categories.all %}
-                                    <a href="#" class="badge badge-info">{{ category }}</a>
-                                    {% endfor %}
-                                | views:&nbsp;{% get_hit_count for post %}&nbsp;&nbsp;<i class="fas fa-eye" aria-hidden="true">&nbsp;views</i>
-                            </p>
-                            {% if user.is_authenticated %}
-                            {% if user.id == post.author.id %}
-                            <a href="{% url 'update_blog_page' post.pk %}" class="btn btn-secondary" role="button">
-                                Edit this blog post
-                            </a>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#deleteModal">
-                                Delete this blog post
-                            </button>
-                            {% endif %}
-                            {% endif %}
+<main class="mt-4 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <!-- blog content -->
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.title }}</h5>
+                        <p>
+                            <img src="{{ post.author.profile.avatar.url }}" alt="" style="width:30px;height:30px;"
+                                class="avatar rounded-pill img-fluid mr-3">Author:&nbsp;{{ post.author }}
+                        </p>
+                        <p>
+                            Published on:&nbsp;{{ post.created_at|date }} | {{ post.created_at|timesince }}&nbsp;ago
+                            <br />
+                            Categories:&nbsp;
 
-                            <!-- modal delete -->
-                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel">Delete this blog post?</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{% url 'delete_blog_page' pk=post.pk %}" method="POST" enctype="multipart/form-data">
-                                                {% csrf_token %}
-                                                <p>
-                                                    Are you sure you want to delete this
-                                                    title:&nbsp;<strong>"{{ post.title }}"</strong>?
-                                                </p>
+                            {% for category in post.categories.all %}
+                            <a href="#" class="badge badge-info">{{ category }}</a>
+                            {% endfor %}
+                            | views:&nbsp;{% get_hit_count for post %}&nbsp;&nbsp;<i class="fas fa-eye"
+                                aria-hidden="true">&nbsp;views</i>
+                        </p>
+                        {% if user.is_authenticated %}
+                        {% if user.id == post.author.id %}
+                        <a href="{% url 'update_blog_page' post.pk %}" class="btn btn-secondary" role="button">
+                            Edit this blog post
+                        </a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                            Delete this blog post
+                        </button>
+                        {% endif %}
+                        {% endif %}
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close </button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </div>
-                                            </form>
-                                        </div>
+                        <!-- modal delete -->
+                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                            aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete this blog post?</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                </div>
-                            </div>
-                            <br><br>
-                            <!-- end of modal delete -->
-                            {% if post.thumbnail %}
-                            <div class="text-center mt-8">
-                                <img src="{{ post.thumbnail.url }}" style="width: 35rem; height: 30rem;" class="rounded-md">
-                            </div>
-                            {% else %}
-                            <div class="text-center mt-8">
-                                <img src="{{ post.image_url }}" style="max-width: 100%;" class="rounded-md">
-                            </div>
-                            {% endif %}
-                            <br/>
-                            <div class="post-content row mt-8">
-                                <div class="col-lg mx-auto">
-                                    <div class="6-60px">
-                                        {{ post.content|safe }}
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end of blog content -->
-                            <!-- related blog post -->
-                            <h2>Similar Blog Post</h2>
-                            <div class="Tags gap-xy-2 text-left mt-6">
-                                {% for tag in post.tags.all %}
-                                <a href="#" class="badge badge-warning">#&nbsp;{{ tag }}</a>
-                                {% endfor %}
-                            </div>
-                            <br>
-                            <div class="row">
-                                {% for post in similar_posts %}
-                                <div class="col-md-6">
-                                    <div class="card border hover-shadow-6 mb-6 d-block">
-                                        {% if post.thumbnail %}
-                                        <a href="#"><img class="card-img-top" src="{{ post.thumbnail.url }}" style="height: 12rem;"></a>
-                                        {% else %}
-                                        <a href="#"><img class="card-img-top" src="{{ post.image_url }}" style="height: 12rem;"></a>
-                                        {% endif %}
-
-                                        <div class="card-body p-3">
-                                            <div class="Tags gap-xy-2 mt-1">
-                                                {% for category in post.categories.all %}
-                                                <a href="#" class="badge badge-secondary text-uppercase">{{ category }}</a>
-                                                {% endfor %}
-                                            </div>
-                                            <h5 class="card-title"><a class="text-dark" href="{{ post.post_link }}">{{ post.title }}</a></h5>
+                                    <div class="modal-body">
+                                        <form action="{% url 'delete_blog_page' pk=post.pk %}" method="POST"
+                                            enctype="multipart/form-data">
+                                            {% csrf_token %}
                                             <p>
-                                                <img src="{{ post.author.profile.avatar.url }}" alt="" style="width:30px;height:30px;" class="avatar rounded-pill img-fluid mr-3">Author:&nbsp;{{ post.author }}
+                                                Are you sure you want to delete this
+                                                title:&nbsp;<strong>"{{ post.title }}"</strong>?
                                             </p>
-                                            <p>Published on:&nbsp;{{ post.created_at|date }}</p>
-                                            <p>{% get_hit_count for post %}&nbsp;&nbsp;<i class="fas fa-eye" aria-hidden="true"></i>&nbsp;views</p>
-                                            <p>
-                                                {{ post.content|slice:"100"|safe }}[...]
-                                            </p>
-                                            <a href="{{ post.post_link }}" class="btn btn-outline-info rounded-0 float-end">Read More<i class="fas fa-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <br>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <!-- end of related blog post -->
-                            <!-- display number of comments -->
-                            {% if post_comments == 0 %}
-                            <h2>Comments(0)</h2>
-                            {% else %}
-                            <h2>Comments({{ post_comments_count }})</h2>
-                            {% endif %}
-                            <!-- end of display of number of comments -->
-                            <div class="row">
-                                <div class="col-lg-12 mx-auto">
-                                    <!-- display comment -->
-                                    <div class="media-list">
-                                        {% for comment in post_comments %}
-                                        {% if comment.is_parent %}
-                                        <div>
-                                            <div class="media-body">
-                                                <div class="small-1">
-                                                    <img class="avatar" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;" src="{{ comment.user.profile.avatar.url }}">
-                                                    <b>{{ comment.user }}</b>
-                                                    <time class="ml-4 opacity-70 small-3">{{ comment.created_at.date }}</time>
-                                                </div>
-                                                <p>{{ comment.content|capfirst }}</p>
 
-                                                {% if user.is_authenticated %}
-                                                <button type="button" class="btn btn-info btn-sm" onclick="commentReplyToggle('{{ comment.pk }}')">Reply</button>
-                                                <div class="row justify-content-center mt-6 mb-5 d-none" id="{{ comment.pk }}">
-                                                    <div class="col-md-10 col-sm-12">
-                                                        <form method="POST" action="{% url 'reply' post.pk comment.pk %}">
-                                                            {% csrf_token %}
-                                                            <div class="form-group">
-                                                                {{ form2 }}
-                                                            </div>
-                                                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Send
-                                                                Reply
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                {% endif %}
-                                                <hr>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close
+                                                </button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
                                             </div>
-                                        </div>
-                                        <!-- reply -->
-                                        {% for child_comment in comment.children %}
-                                        <div>
-                                            <div class="media-body" style="margin-left: 6rem;">
-                                                <div class="small-1">
-                                                    <img class="avatar" style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;" src="{{ child_comment.user.profile.avatar.url }}">
-                                                    <b>{{ child_comment.user }}</b>
-                                                    <time class="ml-4 opacity-70 small-3">
-                                                        {{ child_comment.created_at.date }}
-                                                    </time>
-                                                </div>
-                                                <p>
-                                                    {{ child_comment.content|capfirst }}
-                                                </p>
-                                                <hr>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                        <!-- end of reply -->
-                                        {% endif %}
-                                        {% endfor %}
+                                        </form>
                                     </div>
-                                    <!-- end display comment -->
-                                    <!-- display comment form -->
-                                    {% if user.is_authenticated %}
-                                    <form method="POST" action="{% url 'post' slug=post.slug %}">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            {{ form1 }}
-                                        </div>
-                                        <button type="submit" class="btn btn-info btn-lg btn-block">Send
-                                            Comment</button>
-                                    </form>
-                                    <!-- end display comment form -->
-                                    {% else %}
-                                    <header class="header text-center text-white mx-auto">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
-                                                    style="min-width: 100%;">
-                                                    <div class="col-md-8 mx-auto">
-                                                        <h1 class="display-6 font-italic">Leave a comment...
-                                                        </h1>
-                                                        <p class="lead-2 opacity-90 mt-6">
-                                                            You may <a href="{% url 'account_signup' %}" class="text-decoration-none font-weight-bold">Signup</a>
-                                                            or <a href="{% url 'account_login' %}" class="text-decoration-none font-weight-bold">Signin</a>
-                                                            to post a comment.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </header>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
+                        <br><br>
+                        <!-- end of modal delete -->
+                        {% if post.thumbnail %}
+                        <div class="text-center mt-8">
+                            <img src="{{ post.thumbnail.url }}" style="width: 35rem; height: 30rem;" class="rounded-md">
+                        </div>
+                        {% else %}
+                        <div class="text-center mt-8">
+                            <img src="{{ post.image_url }}" style="max-width: 100%;" class="rounded-md">
+                        </div>
+                        {% endif %}
+                        <p class="card-text">
+                        <section>
+                            <p>{{ post.content|safe }}
+                            </p>
+                        </section>
+                        </p>
                     </div>
                 </div>
-                <!-- side bar -->
-                <!-- side bar -->
-                <div class="col-lg-4 col-xl-4 position-sticky">
-                    <div class="card mb-6">
-                        <!-- search -->
-                        {% include 'blog/search.html' %}
-                        <!-- categories -->
-                        {% include 'blog/categories.html' %}
-                        <!-- top blog -->
-                        {% include 'blog/top_posts.html' %}
-                        <!-- about -->
-                        {% include 'blog/about.html' %}
+                <!-- end of blog content -->
+                <!-- related blog post -->
+                <h2 class="mt-5">Similar Blog Post</h2>
+                <div class="Tags gap-xy-2 text-left mt-6">
+                    {% for tag in post.tags.all %}
+                    <a href="#" class="badge badge-warning">#&nbsp;{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="row gap-y">
+                    {% for post in similar_posts %}
+                    <div class="col-md-6">
+                        <div class="card border hover-shadow-6 mb-6 d-block">
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                {% if post.thumbnail %}
+                                <img class="img-fluid" src="{{ post.thumbnail.url }}" style="height: 18rem;">
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                                {% else %}
+                                <img class="img-fluid" src="{{ post.image_url }}" style="height: 18rem;">
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <div class="Tags gap-xy-2 mt-6">
+                                    {% for category in post.categories.all %}
+                                    <a href="#" class="badge badge-primary text-uppercase">{{ category }}</a>
+                                    {% endfor %}
+                                </div>
+                                <h5 class="card-title"><strong>{{ post.title }}</strong></h5>
+                                <p>
+                                    <img src="{{ post.author.profile.avatar.url }}" alt=""
+                                        style="max-width:50px;max-height:50px;"
+                                        class="avatar rounded-pill img-fluid mr-3">Author:&nbsp;{{ post.author }}
+                                </p>
+                                <p class="text-muted">
+                                    Published on:&nbsp;{{ post.created_at|date }} | {% get_hit_count for post
+                                    %}&nbsp;&nbsp;<i class="fas fa-eye" aria-hidden="true"></i>&nbsp;views
+                                </p>
+
+                                <p class="card-text">{{ post.content|slice:"250"|safe }}[...]</p>
+                                <a href="{{ post.post_link }}" class="btn btn-primary">Read more&nbsp;<i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- end of related blog post -->
+                <!-- display number of comments -->
+                {% if post_comments == 0 %}
+                <h2>Comments(0)</h2>
+                {% else %}
+                <h2>Comments({{ post_comments_count }})</h2>
+                {% endif %}
+                <!-- end of display of number of comments -->
+                <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <!-- display comment -->
+                        <div class="media-list">
+                            {% for comment in post_comments %}
+                            {% if comment.is_parent %}
+                            <div>
+                                <div class="media-body">
+                                    <div class="small-1">
+                                        <img class="avatar"
+                                            style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;"
+                                            src="{{ comment.user.profile.avatar.url }}">
+                                        <b>{{ comment.user }}</b>
+                                        <time class="ml-4 opacity-70 small-3">{{ comment.created_at.date }}</time>
+                                    </div>
+                                    <p>{{ comment.content|capfirst }}</p>
+
+                                    {% if user.is_authenticated %}
+                                    <button type="button" class="btn btn-info btn-sm"
+                                        onclick="commentReplyToggle('{{ comment.pk }}')">Reply</button>
+                                    <div class="row justify-content-center mt-6 mb-5 d-none" id="{{ comment.pk }}">
+                                        <div class="col-md-10 col-sm-12">
+                                            <form method="POST" action="{% url 'reply' post.pk comment.pk %}">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    {{ form2 }}
+                                                </div>
+                                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Send
+                                                    Reply
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    <hr>
+                                </div>
+                            </div>
+                            <!-- reply -->
+                            {% for child_comment in comment.children %}
+                            <div>
+                                <div class="media-body" style="margin-left: 6rem;">
+                                    <div class="small-1">
+                                        <img class="avatar"
+                                            style="vertical-align: middle; width: 30px; height: 30px; border-radius: 50%;"
+                                            src="{{ child_comment.user.profile.avatar.url }}">
+                                        <b>{{ child_comment.user }}</b>
+                                        <time class="ml-4 opacity-70 small-3">
+                                            {{ child_comment.created_at.date }}
+                                        </time>
+                                    </div>
+                                    <p>
+                                        {{ child_comment.content|capfirst }}
+                                    </p>
+                                    <hr>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- end of reply -->
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!-- end display comment -->
+                        <!-- display comment form -->
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'post' slug=post.slug %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form1 }}
+                            </div>
+                            <button type="submit" class="btn btn-info btn-lg btn-block">Send
+                                Comment</button>
+                        </form>
+                        <!-- end display comment form -->
+                        {% else %}
+                        <header class="header text-center text-white mx-auto">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
+                                        style="min-width: 100%;">
+                                        <div class="col-md-8 mx-auto">
+                                            <h1 class="display-6 font-italic">Leave a comment...
+                                            </h1>
+                                            <p class="lead-2 opacity-90 mt-6">
+                                                You may <a href="{% url 'account_signup' %}"
+                                                    class="text-decoration-none font-weight-bold">Signup</a>
+                                                or <a href="{% url 'account_login' %}"
+                                                    class="text-decoration-none font-weight-bold">Signin</a>
+                                                to post a comment.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        {% endif %}
                     </div>
                 </div>
-                <!-- end of side bar -->
+
             </div>
+            <!-- side bar -->
+            <!-- side bar -->
+            <div class="col-lg-4 col-xl-4 position-sticky">
+                <div class="card mb-6">
+                    <!-- search -->
+                    {% include 'blog/search.html' %}
+                    <!-- categories -->
+                    {% include 'blog/categories.html' %}
+                    <!-- top blog -->
+                    {% include 'blog/top_posts.html' %}
+                    <!-- about -->
+                    {% include 'blog/about.html' %}
+                </div>
+            </div>
+            <!-- end of side bar -->
         </div>
     </div>
+
 </main>
-<script type="text/javascript" src="{% static 'js/blog.js' %}"> </script>
+<script type="text/javascript" src="{% static 'js/comment_reply.js' %}"> </script>
+{% include 'pages/footer.html' %}
 {% endblock content %}

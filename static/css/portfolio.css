@@ -87,30 +87,27 @@
     margin-bottom: 20px;
 }
 /* contact */
-.contact ul{
-    position: relative;
-}
-.contact ul li{
+.contact .contact-info{
     position: relative;
     list-style: none;
     margin: 10px 0;
     cursor: pointer;
 }
 
-.contact ul li .icon{
+.contact .contact-info .icon{
     display: inline-block;
     width: 30px;
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
 }
 
-.contact ul li span{
+.contact .contact-info span{
     color: #fff;
     font-weight: 200;
 }
 
-.contact ul li .text{
-    font-size: 15px;
+.contact .contact-info .text{
+    font-size: 14px;
 }
 /* education */
 .contact.education{
@@ -119,17 +116,30 @@
 
 .contact.education h5{
     color: #e3a9f4;
-    font-weight: 500;
+    font-weight: 300;
+    font-size: 14px;
 }
 
 .contact.education h4:nth-child(1){
     color: #fff;
-    font-weight: 500;
+    font-weight: 200;
 }
 
 .contact.education h4{
     color: #fff;
-    font-weight: 300;
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.contact.education h3:nth-child(1){
+    color: #fff;
+    font-weight: 200;
+}
+
+.contact.education h3{
+    color: #fff;
+    font-weight: 200;
+    
 }
 /* language */
 .contact.language .percent{
@@ -167,4 +177,32 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 10px;
+}
+
+.about .box{
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+.about .box .inclusive_dates{
+    min-width: 150px;
+}
+
+.about .box .inclusive_dates h5{
+    text-transform: uppercase;
+    color: #848c90;
+    font-weight: 600;
+}
+
+.about .box .inclusive_dates h6{
+    text-transform: uppercase;
+    color: #848c90;
+    font-weight: 300;
+}
+
+.about .box .text h4{
+    text-transform: uppercase;
+    color: #2a7da2;
+    font-size: 16px;
 }

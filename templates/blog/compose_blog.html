@@ -5,39 +5,57 @@
 {% block title %} | Compose{% endblock title %}
 
 {% block custom_css %}
-<link rel="stylesheet" type="text/css" href="{% static "custom_style.css" %}">
+<style>
+    .compose-body{
+        background: #1B1E2B;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .compose-container{
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        min-height: 1000px;
+        background: #fff;
+        margin: 50px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        box-shadow: 0 35px 55px rgba(0,0,0,0.1);
+    }
+</style>
 {% endblock custom_css %}
 
 {% block content %}
-<div class="row py-5 px-4">
-    <div class="col-md-8 mx-auto">
-        <div class="bg-white shadow rounded overflow-hidden">
-            <div class="container">
+<div class="compose-body">
+    <div class="card compose-container">
+        <div class="card-body">
+            <h5 class="card-title">Let's compose a blog</h5>
+            <p class="card-text">
                 {% if user.is_authenticated %}
-                <h1>Let's compose a blog</h1>
                 <br><br>
-                <div class="form-group">
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.media|safe }}
-                        {{ form|crispy }}
-                        {% comment %} {% if user.is_authenticated %} {% endcomment %}
-                        <button type="submit" class="btn btn-info btn-lg btn-block">Publish</button>
-                        {% comment %} {% endif %} {% endcomment %}
-                    </form>
-                </div>
-                <script>
-                    var name = "{{ user.id }}";
-                    document.getElementById("author_id").value = name;
-                </script>
-                {% else %}
-                <h1 align="center">Please <a href="{% url 'account_signup' %}" class="badge badge-info">Register</a> or <a
-                        href="{% url 'account_login' %}" class="badge badge-info">Sign In</a> First...</h1>
-                {% endif %}
+            <div class="form-group">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media|safe }}
+                    {{ form|crispy }}
+                    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Publish</button>
+                    {% comment %} {% endif %} {% endcomment %}
+                </form>
             </div>
+            <script>
+                var name = "{{ user.id }}";
+                document.getElementById("author_id").value = name;
+            </script>
+            {% else %}
+            <h1 align="center">Please <a href="{% url 'account_signup' %}" class="badge badge-info">Register</a> or
+                <a href="{% url 'account_login' %}" class="badge badge-info">Sign In</a> First...
+            </h1>
+            {% endif %}
+            </p>
         </div>
     </div>
 </div>
-
 {% endblock %}
-

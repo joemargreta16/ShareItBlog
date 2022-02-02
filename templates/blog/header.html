@@ -1,11 +1,11 @@
-<header class=" header text-white bg-dark py-5 bg-light border-bottom mb-4 mt-auto">
+<header class="header text-white bg-dark py-5 bg-light border-bottom mb-4 mt-auto">
     <div class="container">
         <div class="text-center my-5">
             {% for popular in popular_posts_head %}
             <div class="col-md-8 mx-auto">
                 <h1 class="display-6 font-italic">{{ popular.title }}</h1>
                 <p class="lead-2 opacity-90 mt-6">{{ popular.content|slice:":250"|safe }}<b>[...]</b></p>
-                <a href="{{ popular.post_link }}" class="btn btn-lg btn-outline-info rounded-0 float-end">Continue reading...<i class="fas fa-arrow-right"></i></a>
+                <a href="{{ popular.post_link }}" class="btn btn-lg btn-primary btn-rounded">Continue reading...&nbsp;&nbsp<i class="fas fa-arrow-right"></i></a>
             </div>
             {% endfor %}
         </div>

@@ -15,8 +15,6 @@
                     <div class="row gap-y">
                         {% include 'blog/home_posts.html' %}
                     </div>
-                    <!-- pagination -->
-                    {% include 'blog/pagination.html' %}
                 </div>
                 <!-- side bar -->
                 <div class="col-lg-4 col-xl-4 position-sticky">
@@ -33,8 +31,10 @@
                 </div>
                 <!-- end of side bar -->
             </div>
+            <!-- pagination -->
+            {% include 'blog/pagination.html' %}
         </div>
     </div>
 </main>
-
+{% include 'pages/footer.html' %}
 {% endblock content %}
