@@ -4,16 +4,16 @@
 {% for post in posts %}
 <div class="col-md-6">
     <div class="card border hover-shadow-6 mb-6 d-block">
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
             {% if post.thumbnail %}
             <img class="img-fluid" src="{{ post.thumbnail.url }}" style="height: 18rem;">
             <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
             </a>
             {% else %}
             <img class="img-fluid" src="{{ post.image_url }}" style="height: 18rem;">
             <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
             </a>
             {% endif %}
         </div>
