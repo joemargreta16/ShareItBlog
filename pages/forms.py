@@ -24,6 +24,7 @@ class UpdateProfilePageForm( forms.ModelForm ):
         model = Profile
         fields = (
             'first_name',
+            'middle_name',
             'last_name',
             'bio',
             'avatar',
@@ -31,10 +32,26 @@ class UpdateProfilePageForm( forms.ModelForm ):
         
 class UpdateUserPageForm( forms.ModelForm ):
     email = forms.EmailField()
+    username = forms.TextInput()
 
     class Meta:
         model = User
         fields = (
-            'username',
             'email',
+            'username',
         )
+
+        
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        qs = User.objects.filter(email=email)
+        if qs.exists():
+            raise forms.ValidationError("Email is already taken.")
+        return email
+    
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        qs = User.objects.filter(username=username)
+        if qs.exists():
+            raise forms.ValidationError("Username is already taken.")
+        return username

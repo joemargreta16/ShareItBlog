@@ -1,13 +1,15 @@
 from .forms import UpdateProfilePageForm, UpdateUserPageForm, ChangePasswordForm
 from .models import Profile
-from blog.models import Comment
+from blog.models import Comment, User
 from blog.views import Post, Category
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def home(request):
@@ -70,6 +72,7 @@ def update_profile(request):
     profile = Profile.objects.get( user=request.user )
     u_form = UpdateUserPageForm( request.POST or None, instance=request.user )
     p_form = UpdateProfilePageForm( request.POST or None, request.FILES or None, instance=profile )
+    
     confirm = False
 
     if request.method == 'POST':
@@ -89,6 +92,3 @@ def update_profile(request):
 class ChangePassword( PasswordChangeView ):
     form_class = ChangePasswordForm
     success_url = reverse_lazy( 'pages:password_success' )
-
-
-

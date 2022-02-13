@@ -5,51 +5,64 @@
 {% block title %} | Update Profile{% endblock title %}
 
 {% block custom_css %}
-<link rel="stylesheet" type="text/css" href="{% static "custom_style.css" %}">
+<style>
+    .compose-body{
+        background: #1B1E2B;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .compose-container{
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        min-height: 1000px;
+        background: #fff;
+        margin: 50px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        box-shadow: 0 35px 55px rgba(0,0,0,0.1);
+    }
+</style>
 {% endblock custom_css %}
 
 {% block content %}
+<div class="compose-body">
+    <div class="card compose-container">
+        <h1 class="card-title ml-5 mt-5">Edit Profile</h1>
+        <div class="bg-image hover-overlay hover-zoom hover-shadow ripple text-center">
+            <img class="img-fluid" style="height: 18rem;" src="{{ user.profile.avatar.url }}">
+            <a href="#!">
+                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+            </a>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
 
-<div class="d-flex align-items-center min-vh-30">
-    <div class="container">
-        <div class="card border-primary">
-            <div class="card-body">
-                <div class="content-section">
-                    <div class="media">
-                        <img class="rounded-circle account-img"
-                            style="vertical-align: middle; width: 190px; height: 190px; border-radius: 90%; padding: 20px;"
-                            src="{{ user.profile.avatar.url }}">
-                        <div class="media-body ml-20 pl-50">
-                            <h2 class="account-heading align-item-center">{{ user.username }}</h2>
-                            <p class="text-secondary">{{ user.email }}</p>
+                        {% if confirm %}
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>You profile has been updated.</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div>
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <fieldset class="form-group">
+                        {% endif %}
 
-                            {% if confirm %}
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <strong>You profile has been updated.</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            {% endif %}
+                        <legend class="border-bottom mb-4">Profile Info</legend>
+                        {{ u_form|crispy }}
+                        {{ p_form|crispy }}
 
-                            <legend class="border-bottom mb-4">Profile Info</legend>
-                            {{ u_form|crispy }}
-                            {{ p_form|crispy }}
-
-                            <div class="form-group">
-                                <button class="btn btn-info btn-block" type="submit">Update profile</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" type="submit">Update profile</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </p>
         </div>
     </div>
 </div>
-
-{% endblock content %}
+{% endblock %}

@@ -7,9 +7,10 @@ from PIL import Image
 # Create your models here.
 class Profile( models.Model ):
     first_name = models.CharField( max_length=200, blank=True )
+    middle_name = models.CharField( max_length=200, blank=True )
     last_name = models.CharField( max_length=200, blank=True )
-    last_name = models.CharField( max_length=200, blank=True )
-    user = models.OneToOneField( User, max_length=200, on_delete=models.CASCADE )
+    user = models.OneToOneField( User, max_length=200, on_delete=models.CASCADE, unique=True )
+    
     bio = models.TextField( max_length=500, blank=True )
     avatar = models.ImageField( default='default/avatar.png', upload_to='avatars/' )
     created_at = models.DateTimeField( auto_now_add=True )

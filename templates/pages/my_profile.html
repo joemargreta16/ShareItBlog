@@ -16,11 +16,11 @@
         {% comment %} profile widget {% endcomment %}
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
-                <div class="media align-items-end">
+                <div class="media">
                     <div class="profile mr-3 profile-img">
                         <img src="{{ profile.avatar.url }}" alt="..." width="200" height="200" class="rounded mb-2 img-thumbnail">
                         {% if user.is_authenticated %}
-                        <a href="{% url 'pages:update_profile' %}" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+                        <a href="{% url 'pages:update_profile' %}" type="button" class="btn btn-primary btn-block">Edit profile</a>
                     </div>
                         {% endif %}
                     <div class="media-body mb-5 text-white profile-head">
