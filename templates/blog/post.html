@@ -102,8 +102,8 @@
                 <div class="row gap-y">
                     {% for post in similar_posts %}
                     <div class="col-md-6">
-                        <div class="card border hover-shadow-6 mb-6 d-block">
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <div class="card border hover-shadow-6 mb-6 d-block bg-image hover-overlay hover-zoom hover-shadow ripple">
+                            <div class="bg-image hover-overlay hover-zoom hover-shadow ripple" data-mdb-ripple-color="light">
                                 {% if post.thumbnail %}
                                 <img class="img-fluid" src="{{ post.thumbnail.url }}" style="height: 18rem;">
                                 <a href="#!">

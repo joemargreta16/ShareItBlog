@@ -16,7 +16,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> {% block custom_css %}{% endblock custom_css %}
 
     <!-- MDB -->
-    {% block mdb_css %}{% endblock mdb_css %}
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}"/>
 
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/f77049314d.js" crossorigin="anonymous"></script>
@@ -27,7 +27,9 @@
 <body>
     {% include 'pages/navbar.html' %}
     
-    {% block content %} {% endblock content %}
+    {% block content %}
+    
+    {% endblock content %}
     
     {% include 'pages/scripts.html' %}
 </body>

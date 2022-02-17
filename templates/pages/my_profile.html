@@ -3,68 +3,70 @@
 {% load static %}
 {% load hitcount_tags %}
 
-{% block custom_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
-{% endblock custom_css %}
-
 {% block title %} | My Profile{% endblock title %}
 
 {% block content %}
 
-<div class="row py-5 px-4">
-    <div class="col-md-8 mx-auto">
-        {% comment %} profile widget {% endcomment %}
-        <div class="bg-white shadow rounded overflow-hidden">
-            <div class="px-4 pt-0 pb-4 cover">
-                <div class="media">
-                    <div class="profile mr-3 profile-img">
-                        <img src="{{ profile.avatar.url }}" alt="..." width="200" height="200" class="rounded mb-2 img-thumbnail">
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'pages:update_profile' %}" type="button" class="btn btn-primary btn-block">Edit profile</a>
+<section class="h-100 gradient-custom-2">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+                <div class="card">
+                    <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+                        <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                            <img src="{{ profile.avatar.url }}"
+                                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                style="width: 150px; z-index: 1">
+                            
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'pages:update_profile' %}" type="button" class="btn btn-primary" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                Edit profile
+                            </a>
+                            {% endif %}
+                        </div>
+                        <div class="ms-3" style="margin-top: 130px;">
+                            <h5>{{ profile.first_name }}&nbsp;{{ profile.middle_name }}&nbsp;{{ profile.last_name }}</h5>
+                            <p>{{ profile.user }}</p>
+                        </div>
                     </div>
-                        {% endif %}
-                    <div class="media-body mb-5 text-white profile-head">
-                        <h4 class="mt-0 mb-0">{{ profile.first_name }}&nbsp;{{ profile.last_name }}</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{ profile.user }}</p>
+                    <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                        <div class="d-flex justify-content-end text-center py-1">
+                            <div>
+                                <p class="mb-1 h5">{{ posts_count }}</p>
+                                <p class="small text-muted mb-0"># of Blog Posts</p>
+                            </div>
+                            <div class="px-3">
+                                <p class="mb-1 h5">{{ comment_count }}</p>
+                                <p class="small text-muted mb-0"># Comments</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
+                    <div class="card-body p-4 text-black">
+                        <div class="mb-5">
+                            <p class="lead fw-normal mb-1">About Me</p>
+                            <div class="p-4" style="background-color: #f8f9fa;">
+                                <p class="font-italic mb-1">{{ profile.bio }}</p>
+                            </div>
 
-                        <h5 class="font-weight-bold mb-0 d-block">{{ posts_count }}</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i># of Blog Posts</small>
-
-                    </li>
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">{{ comment_count }}</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i># Comments</small>
-                    </li>
-                </ul>
-            </div>
-            <div class="px-4 py-3">
-                <h5 class="mb-2">My Profile</h5>
-                <div class="p-4 rounded shadow-sm bg-light">
-                    <p><strong>Email:</strong>&nbsp; {{ profile.user.email }}</p>
-                    <p><strong>About me:</strong></p>
-                    <p>{{ profile.bio }}</p>
-                </div>
-            </div>
-            <div class="py-4 px-4">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">Blog posts</h5><a href="#" class="btn btn-link text-muted">Show all</a>
-                </div>
-                <div class="row">
-                    <div class="align-items-center col-md-8 col-xl-9">
-                        <div class="row gap-y">
-                            <!--                for all the blog post of the current user-->
+                            <p class="lead fw-normal mb-1">Email Address</p>
+                            <div class="p-4" style="background-color: #f8f9fa;">
+                                <p class="font-italic mb-1">{{ profile.user.email }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0">My Blog Posts</p>
+                        </div>
+                        <div class="row g-2">
                             {% if posts %}
                             {% for post in posts %}
                             <div class="col-md-6">
-                                <div class="card border hover-shadow-6 mb-6 d-block">
+                                <div class="card border hover-shadow-6 mb-6 d-block bg-image hover-overlay hover-zoom hover-shadow ripple">
                                     {% if post.thumbnail %}
-                                    <a href="#"><img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap"></a>
+                                    <a href="#"><img class="card-img-top" src="{{ post.thumbnail.url }}"
+                                            alt="Card image cap" style="height: 18rem;"></a>
                                     {% else %}
-                                    <a href="#"><img class="card-img-top" src="{{ post.image_url }}" alt="Card image cap"></a>
+                                    <a href="#"><img class="card-img-top" src="{{ post.image_url }}"
+                                            alt="Card image cap" style="height: 18rem;"></a>
                                     {% endif %}
 
                                     <div class="card-body p-6 text-center">
@@ -76,8 +78,7 @@
                                         <h5 class="card-title mb=0"><a class="text-dark" href="{{ post.post_link }}">{{ post.title }}</a></h5>
                                         <p>Author:&nbsp;{{ post.author }}</p>
                                         <p>
-                                            Published on:&nbsp;{{ post.created_at|date }} | {% get_hit_count for post %}&nbsp;&nbsp;<i
-                                                class="fas fa-eye" aria-hidden="true"></i>&nbsp;views
+                                            Published on:&nbsp;{{ post.created_at|date }} | {% get_hit_count for post %}&nbsp;&nbsp;<i class="fas fa-eye" aria-hidden="true"></i>&nbsp;views
                                         </p>
                                     </div>
                                 </div>
@@ -88,16 +89,17 @@
                             {% else %}
                             <h1 align="center">No post for this user yet...</h1>
                             {% endif %}
-        {% comment %} end for all the blog post of the current user {% endcomment %}
+                            {% comment %} end for all the blog post of the current user {% endcomment %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-{% include 'blog/pagination.html' %}
+    {% include 'blog/pagination.html' %}
+    {% include 'pages/footer.html' %}
+</section>
 
 {% endblock content %}
+
 
