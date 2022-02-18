@@ -1,186 +1,332 @@
-<!DOCTYPE html>
-
+{% extends 'pages/base.html' %}
 {% load static %}
-<html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block title %} | Portfolio{% endblock title %}
 
-    <!-- bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% block content %}
 
-    <!-- custom CSS-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> {% block custom_css %}{% endblock custom_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
-    <!-- fontawesome -->
-    <script src="https://kit.fontawesome.com/f77049314d.js" crossorigin="anonymous"></script>
-
-    <title>ShareItBlog | Joemar T. Greta</title>
-</head>
-
-<body>
-    {% include 'pages/navbar.html' %}
-    <div class="portfolio-body">
-        <div class="portfolio-container">
-            <!-- left side -->
-            <div class="left-side">
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="{% static 'profile_img.png' %}" alt="">
-                    </div>
-                    <h2>Joemar T. Greta<br><span>Web Dev</span></h2>
-                </div>
-                <!-- contact info -->
-                <div class="contact">
-                    <h2 class="title1">Contact me</h2>
-                    <div class="contact-info">
-                        <span class="icon"><i class="fas fa-phone" aria-hidden="true"></i></span>
-                        <span class="text">+639452209284</span>
-                    </div>
-
-                    <div class="contact-info">
-                        <span class="icon"><i class="fab fa-facebook-f"></i></span>
-                        <span class="text">facebook.com/joemar.greta</span>
-                    </div>
-
-                    <div class="contact-info">
-                        <span class="icon"><i class="fab fa-linkedin-in"></i></span>
-                        <span class="text">linkedin.com/in/joemar-greta-98a970175</span>
-                    </div>
-
-                    <div class="contact-info">
-                        <span class="icon"><i class="fas fa-envelope"></i></span>
-                        <span class="text">joemar.greta16@gmail.com</span>
-                    </div>
-
-                    <div class="contact-info">
-                        <span class="icon"><i class="fa fa-map-marker"></i></span>
-                        <span class="text">209 Gana Compound Barangay Unang Sigaw Balintawak Q.C.</span>
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="{% static 'profile_img.png' %}" alt="avatar" class="rounded-circle img-fluid"
+                            style="width: 150px;">
+                        <h5 class="my-3">Joemar T. Greta</h5>
+                        <p class="text-muted mb-1">Developer</p>
+                        <p class="text-muted mb-4">Balintawak Quezon City, Philippines</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-primary">Follow</button>
+                            <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                        </div>
                     </div>
                 </div>
-                <!-- end of contct info -->
-                <!-- education background -->
-                <div class="contact education">
-                    <h2 class="title1">Education</h2>
-                    <ul>
-                        <li>
-                            <h5>2017 - 2021</h5>
-                            <h3>BS Information Technology</h3>
-                            <h4>STI College - Munoz EDSA</h4>
-                        </li>
-                        <li>
-                            <h5>2004 - 2008</h5>
-                            <h4>San Jose High School</h4>
-                        </li>
-                        <li>
-                            <h5>1998 - 2004</h5>
-                            <h4>Bonifacio Memorial Elementary School</h4>
-                        </li>
-                    </ul>
+
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fas fa-globe fa-lg text-warning"></i>
+                                <p class="mb-0">shareitblog.com</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <p class="mb-0">joemargreta16</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                <p class="mb-0">facebook.com/joemar.greta</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- end of education background -->
-                <!-- education background -->
-                <div class="contact language">
-                    <h2 class="title1">Languages</h2>
-                    <ul>
-                        <li>
-                            <span class="text">Bisaya</span>
-                            <span class="percent">
-                                <div style="width: 5%;"></div>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="text">English</span>
-                            <span class="percent">
-                                <div style="width: 85%;"></div>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="text">Tagalog</span>
-                            <span class="percent">
-                                <div style="width: 100%;"></div>
-                            </span>
-                        </li>
-                    </ul>
+
+                <div class="card mt-4 mb-lg-0">
+                    <div class="card-body">
+                        <p class="mb-4"><span class="text-primary font-italic me-1">Language</span>&nbsp;Spoken</p>
+                        <p class="mb-1" style="font-size: .77rem;">Bisaya</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 8%" aria-valuenow="8"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">Tagalog</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 96%" aria-valuenow="96"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">English</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
                 </div>
-                <!-- end of education background -->
+
+                <div class="card mt-4 mb-lg-0">
+                    <div class="card-body">
+                        <p class="mb-4"><span class="text-primary font-italic me-1">Skills</span>&nbsp;Acquired</p>
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">C#</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">Django</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">JAVA/p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">MS Excel</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">MS Powerpoint</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">MS Word</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">MySQL</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">PostgreSQL</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">Python</p>
+                        <div class="progress rounded" style="height: 5px;">
+                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>                 
+                    </div>
+                </div>
             </div>
-            <!-- end of left side -->
-            <!-- right side -->
-            <div class="right-side">
-                <!-- profile -->
-                <div class="about">
-                    <h2 class="title2">Profile</h2>
-                    <p >Hello, my name is Joemar Greta, you can call me Joemar, and I am thirty years old. I graduated with a bachelor's degree in Information Technology. I chose this area of study because I always had an interest in computer algorithm and programming. And a couple of family members and friends told me that it leads to greater career options.
-                        <br><br>
-                        During my academic career me and my friends join in an event called a hackathon, and we learned a lot from that competition, such as how to pitch your system, and how to properly analyze the current problem to find and provide the proper solution. I also realized that there are still a lot of technologies that could be the solution to the problem we are currently experiencing.
-                        <br><br>
-                        I'm a documentary researcher on my theses days. And there is a situation where our programmer is unable to accomplish his job on schedule because he has a fever and there are only three days before the mock defense. To ensure that we will be able to present our system to the panel, I decided to do the programming temporarily until the scheduled mock defense.
-                    </p>
-                </div>
 
-                <div class="about">
-                    <h2 class="title2">Experience</h2>
-                    <div class="box">
-                        <div class="inclusive_dates">
-                            <h5>October 31, 2019</h5>
-                            <h6>Participant</h6>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-3 text-uppercase">Profile Info</h3>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">Joemar Troyo Greta</p>
+                            </div>
                         </div>
-                        <div class="text">
-                            <h4>Impact Hackathon</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus quam aliquam libero rutrum malesuada. Phasellus aliquam libero ac ornare elementum. Ut scelerisque ultricies tellus eu porttitor. Donec eu euismod nibh, eget congue tellus. Duis ullamcorper quam risus, nec accumsan ligula auctor a. Proin quis euismod dolor, quis porttitor magna.
-                            </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">joemar.greta16@gmail.com</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="box">
-                        <div class="inclusive_dates">
-                            <h5>November 2019</h5>
-                            <h6>Participant</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">N/A</p>
+                            </div>
                         </div>
-                        <div class="text">
-                            <h4>Coca-Cola: CodeFest2019</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus quam aliquam libero rutrum malesuada. Phasellus aliquam libero ac ornare elementum. Ut scelerisque ultricies tellus eu porttitor. Donec eu euismod nibh, eget congue tellus. Duis ullamcorper quam risus, nec accumsan ligula auctor a. Proin quis euismod dolor, quis porttitor magna.
-                            </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Mobile</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">(+63)9452209284</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="box">
-                        <div class="inclusive_dates">
-                            <h5>2019</h5>
-                            <h6>Participant</h6>
-                        </div>
-                        <div class="text">
-                            <h4>HomeCredit: Hackathon</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus quam aliquam libero rutrum malesuada. Phasellus aliquam libero ac ornare elementum. Ut scelerisque ultricies tellus eu porttitor. Donec eu euismod nibh, eget congue tellus. Duis ullamcorper quam risus, nec accumsan ligula auctor a. Proin quis euismod dolor, quis porttitor magna.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="box">
-                        <div class="inclusive_dates">
-                            <h5>2019</h5>
-                            <h6>Participant</h6>
-                        </div>
-                        <div class="text">
-                            <h4>HackaTAX</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dapibus quam aliquam libero rutrum malesuada. Phasellus aliquam libero ac ornare elementum. Ut scelerisque ultricies tellus eu porttitor. Donec eu euismod nibh, eget congue tellus. Duis ullamcorper quam risus, nec accumsan ligula auctor a. Proin quis euismod dolor, quis porttitor magna.
-                            </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">Balintawak Quezon City, Philippines</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- end of profile -->
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-3 text-uppercase">Educational Background</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Level</th>
+                                    <th scope="col">Inclusive Dates</th>
+                                    <th scope="col">Name of school/Institution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted">Tertiary</td>
+                                    <td class="text-muted">2017-2021</td>
+                                    <td class="text-muted">STI College Munoz EDSA</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">Secondary</td>
+                                    <td class="text-muted">2004-2008</td>
+                                    <td class="text-muted">San Jose High School</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">Primary</td>
+                                    <td class="text-muted">1998-2004</td>
+                                    <td class="text-muted">Bonifacio Memorial Elementary School</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-3 text-uppercase">Professional/Volunteer Experience</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Inclusive Dates</th>
+                                    <th scope="col">Nature of Experience/Job Title</th>
+                                    <th scope="col">Name of Company/Organization</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted">October 31, 2019</td>
+                                    <td class="text-muted">Participant</td>
+                                    <td class="text-muted">Impact Hackathon2050(Smart Araneta)</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">November of 2019</td>
+                                    <td class="text-muted">Participant</td>
+                                    <td class="text-muted">CodeFest2019</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">2019</td>
+                                    <td class="text-muted">Participant</td>
+                                    <td class="text-muted">HomeCredit</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">2019</td>
+                                    <td class="text-muted">Participant</td>
+                                    <td class="text-muted">HackaTax</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-3 text-uppercase">Trainings, Seminar/Workshop Attended</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Inclusive Dates</th>
+                                    <th scope="col">Title of Trainings, Seminar/Workshop Attended</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted">October 31, 2019</td>
+                                    <td class="text-muted">Impact Hackathon2050(Smart Araneta)</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">2021</td>
+                                    <td class="text-muted">HCIA - 5G Course</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">2021</td>
+                                    <td class="text-muted">5G Overview - Mobile Communication Evolution</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">2021</td>
+                                    <td class="text-muted">HCIA - Cloud Computing Course</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-muted">2021</td>
+                                    <td class="text-muted">HCIA - IoT</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4"><span class="text-primary font-italic me-1">My</span> Projects</p>
+                                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                                <div class="progress rounded" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                                <div class="progress rounded mb-2" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- end of right side -->
         </div>
     </div>
-    {% include 'pages/scripts.html' %}
-</body>
-</html>
+    {% include 'pages/footer.html' %}
+</section>
+
+{% endblock content %}
