@@ -10,22 +10,27 @@
 <section class="h-100 gradient-custom-2">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-lg-9 col-xl-7">
+            <div class="col col-lg-10 col-xl-10">
                 <div class="card">
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                         <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                            <img src="{{ profile.avatar.url }}"
-                                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                style="width: 150px; z-index: 1">
+                            <img src="{{ profile.avatar.url }}" alt="Generic placeholder image"
+                                class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+
+                            <div class="d-flex justify-content-center mb-2">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'pages:update_profile' %}" type="button" class="btn btn-secondary"
+                                    data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    Edit profile
+                                </a>
+                                {% endif %}
+                            </div>
+
                             
-                            {% if user.is_authenticated %}
-                            <a href="{% url 'pages:update_profile' %}" type="button" class="btn btn-primary" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                Edit profile
-                            </a>
-                            {% endif %}
                         </div>
                         <div class="ms-3" style="margin-top: 130px;">
-                            <h5>{{ profile.first_name }}&nbsp;{{ profile.middle_name }}&nbsp;{{ profile.last_name }}</h5>
+                            <h5>{{ profile.first_name }}&nbsp;{{ profile.middle_name }}&nbsp;{{ profile.last_name }}
+                            </h5>
                             <p>{{ profile.user }}</p>
                         </div>
                     </div>
@@ -60,7 +65,8 @@
                             {% if posts %}
                             {% for post in posts %}
                             <div class="col-md-6">
-                                <div class="card border hover-shadow-6 mb-6 d-block bg-image hover-overlay hover-zoom hover-shadow ripple">
+                                <div
+                                    class="card border hover-shadow-6 mb-6 d-block bg-image hover-overlay hover-zoom hover-shadow ripple">
                                     {% if post.thumbnail %}
                                     <a href="#"><img class="card-img-top" src="{{ post.thumbnail.url }}"
                                             alt="Card image cap" style="height: 18rem;"></a>
@@ -75,10 +81,12 @@
                                             <a href="#" class="badge badge-secondary text-uppercase">{{ category }}</a>
                                             {% endfor %}
                                         </div>
-                                        <h5 class="card-title mb=0"><a class="text-dark" href="{{ post.post_link }}">{{ post.title }}</a></h5>
+                                        <h5 class="card-title mb=0"><a class="text-dark" href="{{ post.post_link }}">{{
+                                                post.title }}</a></h5>
                                         <p>Author:&nbsp;{{ post.author }}</p>
                                         <p>
-                                            Published on:&nbsp;{{ post.created_at|date }} | {% get_hit_count for post %}&nbsp;&nbsp;<i class="fas fa-eye" aria-hidden="true"></i>&nbsp;views
+                                            Published on:&nbsp;{{ post.created_at|date }} | {% get_hit_count for post
+                                            %}&nbsp;&nbsp;<i class="fas fa-eye" aria-hidden="true"></i>&nbsp;views
                                         </p>
                                     </div>
                                 </div>
@@ -101,5 +109,3 @@
 </section>
 
 {% endblock content %}
-
-
