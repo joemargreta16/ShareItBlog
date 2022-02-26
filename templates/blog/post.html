@@ -16,7 +16,7 @@
                         <h2 class="card-title">{{ post.title }}</h5>
                         <p>
                             <img src="{{ post.author.profile.avatar.url }}" alt="" style="width:30px;height:30px;"
-                                class="avatar rounded-pill img-fluid mr-3">Author:&nbsp;{{ post.author }}
+                                class="avatar rounded-pill img-fluid mr-3">Author:&nbsp;<a href="{% url 'pages:author_profiles' post.author.profile.id %}">{{ post.author }}</a>
                         </p>
                         <p>
                             Published on:&nbsp;{{ post.created_at|date }} | {{ post.created_at|timesince }}&nbsp;ago

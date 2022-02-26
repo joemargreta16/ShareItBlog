@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 
@@ -35,6 +35,34 @@ def home(request):
         'popular_posts_head': popular_posts_head,
     }
     return render( request, 'blog/blog.html', context )
+
+@login_required
+def author_profiles(request, id):
+    author_profile_page = get_object_or_404(Post, pk=id )
+    profile = Profile.objects.get( user=id )
+    posts = Post.objects.filter( author=id )
+    posts_count = Post.objects.filter( author=id ).count()
+    comment_count = Comment.objects.filter( user=id ).count()
+    
+    page = request.GET.get( 'page' )
+    paginator = Paginator( posts, 8 )
+    try:
+        posts = paginator.page( page )
+    except PageNotAnInteger:
+        posts = paginator.page( 1 )
+    except EmptyPage:
+        posts = paginator.page( paginator.num_pages )
+    
+    context = {
+        'author_profile_page': author_profile_page,
+        'profile': profile,
+        'posts': posts,
+        'posts_count': posts_count,
+        'comment_count': comment_count,
+        'page': page,
+    }
+    
+    return render( request, 'pages/author_profile.html', context )
 
 @login_required
 def my_profile(request):
