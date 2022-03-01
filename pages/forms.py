@@ -40,18 +40,23 @@ class UpdateUserPageForm( forms.ModelForm ):
             'email',
             'username',
         )
+        
+    widgets = {
+            'email': forms.TextInput(
+                attrs={'class': 'form-control', 'value': '', 'id': 'id_email', 'type': 'email'}),
+        }
 
         
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        qs = User.objects.filter(email=email)
-        if qs.exists():
-            raise forms.ValidationError("Email is already taken.")
-        return email
+    # def clean_email(self):
+    #     email = self.cleaned_data.get('email')
+    #     qs = User.objects.filter(email=email)
+    #     if qs.exists():
+    #         raise forms.ValidationError("Email is already taken.")
+    #     return email
     
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        qs = User.objects.filter(username=username)
-        if qs.exists():
-            raise forms.ValidationError("Username is already taken.")
-        return username
+    # def clean_username(self):
+    #     username = self.cleaned_data.get('username')
+    #     qs = User.objects.filter(username=username)
+    #     if qs.exists():
+    #         raise forms.ValidationError("Username is already taken.")
+    #     return username

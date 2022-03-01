@@ -19,10 +19,12 @@
 
                             <div class="d-flex justify-content-center mb-2">
                                 {% if user.is_authenticated %}
+                                {% if user.id == profile.id %}
                                 <a href="{% url 'pages:update_profile' %}" type="button" class="btn btn-secondary"
                                     data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit profile
                                 </a>
+                                {% endif %}
                                 {% endif %}
                             </div>
 

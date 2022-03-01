@@ -11,6 +11,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django import forms
+
 # Create your views here.
 def home(request):
     posts = Post.objects.all()
@@ -101,19 +105,25 @@ def update_profile(request):
     u_form = UpdateUserPageForm( request.POST or None, instance=request.user )
     p_form = UpdateProfilePageForm( request.POST or None, request.FILES or None, instance=profile )
     
-    confirm = False
-
+    success = False
+    failed = False
+    
     if request.method == 'POST':
         if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            confirm = True
+            if User.objects.filter(email=request.user.email).exists():
+                failed = True
+            
+            else:
+                u_form.save()
+                p_form.save()
+                success = True
 
     context = {
         'profile': profile,
         'u_form': u_form,
         'p_form': p_form,
-        'confirm': confirm,
+        'success': success,
+        'failed': failed,
     }
     return render( request, 'pages/myprofile_edit_form.html', context )
 

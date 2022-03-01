@@ -24,9 +24,18 @@
                             {% csrf_token %}
                             <fieldset class="form-group">
             
-                                {% if confirm %}
+                                {% if success %}
                                 <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                    <strong>You profile has been updated.</strong>
+                                    <strong>Your profile has been updated.</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {% endif %}
+
+                                {% if failed %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Email already exist. Failed to update your profile.</strong>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
