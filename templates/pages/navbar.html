@@ -34,13 +34,13 @@
         {% if user.is_authenticated %}
         <!-- Right elements -->
         <div class="d-flex align-items-center">
-            <p class="me-auto mb-2 mb-lg-0"><strong style="color: green;">Hello, {{ user }}!</strong></p>
+            <p class="me-auto mb-2 mb-lg-0"><strong style="color: #08355E;">Hello, {{ user }}!</strong></p>
             
             <!-- Avatar -->
-            <div class="dropdown">
+            <div class="dropdown ml-5 mr-4">
                 <a class="dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar"
                     role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img class="avatar rounded-circle" height="30" alt="This is image..." loading="lazy" src="{{ request.user.profile.avatar.url }}">
+                    <img class="avatar rounded-circle" height="40" alt="This is image..." loading="lazy" src="{{ request.user.profile.avatar.url }}">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                     {% url 'my_profile' as my_profile %}

@@ -65,7 +65,7 @@ ROOT_URLCONF = 'shareItBlog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,6 +150,6 @@ DEFAULT_FROM_EMAIL = "ShareItBlog"
 
 # if localhost
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_mails')
+EMAIL_FILE_PATH = BASE_DIR / 'sent_mails'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
