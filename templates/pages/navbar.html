@@ -34,6 +34,8 @@
         {% if user.is_authenticated %}
         <!-- Right elements -->
         <div class="d-flex align-items-center">
+            <p class="me-auto mb-2 mb-lg-0"><strong style="color: green;">Hello, {{ user }}!</strong></p>
+            
             <!-- Avatar -->
             <div class="dropdown">
                 <a class="dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar"
@@ -67,6 +69,6 @@
 </nav>
 <!-- end of navbar -->
 
-{% block mdb_js %}
-<script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
-{% endblock mdb_js %}
+<!-- {% block mdb_js %}
+
+{% endblock mdb_js %} -->

@@ -1,16 +1,13 @@
+from decouple import config
+from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
+
+import dj_database_url
 import os
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-SECRET_KEY = 'django-insecure-hjpaby%k0judizw&#d@i!0o+^o1urgnbpq^oddjq=b@#16b+fx'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 INSTALLED_APPS = [
@@ -38,6 +35,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'django.contrib.sites',
+    
+    # prod and dev
+    'django_extensions',
+    'storages',
 
     # taggit
     'taggit',
@@ -87,13 +88,10 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = 'shareItBlog.wsgi.application'
 
+load_dotenv(find_dotenv())
+
 # Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {'default': dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=666)}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -121,22 +119,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
-
-if DEBUG:
-    STATICFILES_DIRS = [os.path.join( BASE_DIR, 'static' )]
-else:
-    STATIC_ROOT = os.path.join( BASE_DIR, 'static' )
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-#
-#   ckeditor path
+# ckeditor path
 CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = '/media/'
-#
-#   custom cdkeditor
+
+# custom cdkeditor
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
