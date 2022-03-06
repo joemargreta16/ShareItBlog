@@ -23,7 +23,7 @@
                         <form action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <fieldset class="form-group">
-            
+
                                 {% if success %}
                                 <div class="alert alert-info alert-dismissible fade show" role="alert">
                                     <strong>Your profile has been updated.</strong>
@@ -41,11 +41,11 @@
                                     </button>
                                 </div>
                                 {% endif %}
-            
+
                                 <legend class="border-bottom mb-4">Profile Info</legend>
                                 {{ u_form|crispy }}
                                 {{ p_form|crispy }}
-            
+
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-block" type="submit">Update profile</button>
                                 </div>
@@ -62,3 +62,5 @@
 </section>
 
 {% endblock %}
+
+
