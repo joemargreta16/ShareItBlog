@@ -1,7 +1,7 @@
 from . import views
 from django.conf.urls import url
 from django.urls import path, re_path
-from pages.views import author_profiles, home, my_profile, ChangePassword, update_profile, portfolio
+from pages.views import author_profiles, ChangePassword, DevProfileView, home, my_profile, portfolio, update_profile
 
 app_name = 'pages'
 
@@ -12,5 +12,5 @@ urlpatterns = [
     path( 'my_profile/', my_profile, name='my_profile' ),
     path( 'my_profile/update/', update_profile, name='update_profile' ),
     path( 'password_success/', views.password_success, name='password_success' ),
-    path( 'portfolio/', portfolio, name='portfolio' ),
+    path( 'developer_profile/', DevProfileView.as_view(), name='developer_profile' ),
 ]

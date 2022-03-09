@@ -1,19 +1,18 @@
 from .forms import UpdateProfilePageForm, UpdateUserPageForm, ChangePasswordForm
-from .models import Profile
+from .models import DevEduBackground, DevProfessionalVolunteerEXP, DevProfile, DevTrainingsSeminarsWorkshopAttended,Profile
 from blog.models import Comment, User
 from blog.views import Post, Category
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django import forms
+
 
 # Create your views here.
 def home(request):
@@ -130,3 +129,14 @@ def update_profile(request):
 class ChangePassword( PasswordChangeView ):
     form_class = ChangePasswordForm
     success_url = reverse_lazy( 'pages:password_success' )
+    
+class DevProfileView(TemplateView):
+    template_name = 'pages/portfolio.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dev_profile'] = DevProfile.objects.first()
+        context['dev_edu_background'] = DevEduBackground.objects.all()
+        context['dev_pro'] = DevProfessionalVolunteerEXP.objects.all()
+        context['dev_attended'] = DevTrainingsSeminarsWorkshopAttended.objects.all()
+        return context

@@ -3,15 +3,15 @@
 
 {% for post in posts %}
 <div class="col-md-6">
-    <div class="card border hover-shadow-6 mb-6 d-block bg-image hover-overlay hover-zoom hover-shadow ripple">
+    <div class="card border hover-shadow-6 mb-6 d-block bg-image">
         <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
             {% if post.thumbnail %}
-            <img class="img-fluid" src="{{ post.thumbnail.url }}" style="height: 18rem;">
+            <img class="img-fluid" src="{{ post.thumbnail.url }}" style="height: 18rem; max-width: 100%;">
             <a href="#!">
                 <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
             </a>
             {% else %}
-            <img class="img-fluid" src="{{ post.image_url }}" style="height: 18rem;">
+            <img class="img-fluid" src="{{ post.image_url }}" style="height: 18rem; max-width: 100%;">
             <a href="#!">
                 <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
             </a>

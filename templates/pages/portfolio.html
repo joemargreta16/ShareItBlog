@@ -11,11 +11,11 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="{% static 'profile_img.png' %}" alt="avatar" class="rounded-circle img-fluid"
+                        <img src="{{ dev_profile.dev_avatar.url }}" alt="dev_avatar" class="rounded-circle img-fluid"
                             style="width: 150px;">
-                        <h5 class="my-3">Joemar T. Greta</h5>
-                        <p class="text-muted mb-1">Developer</p>
-                        <p class="text-muted mb-4">Balintawak Quezon City, Philippines</p>
+                        <h5 class="my-3">{{ dev_profile.first_name }}&nbsp;{{ dev_profile.middle_name|slice:'1' }}.&nbsp{{ dev_profile.last_name }}</h5>
+                        <p class="text-muted mb-1">{{ dev_profile.job_title }}</p>
+                        <p class="text-muted mb-4">{{ dev_profile.address }}</p>
                         <div class="d-flex justify-content-center mb-2">
                             <button type="button" class="btn btn-primary">Follow</button>
                             <button type="button" class="btn btn-outline-primary ms-1">Message</button>
@@ -126,13 +126,13 @@
             <div class="col-lg-8">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h3 class="mb-3 text-uppercase">Profile Info</h3>
+                        <h3 class="mb-3 text-uppercase">Developer's Profile Info</h3>
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">Joemar Troyo Greta</p>
+                                <p class="text-muted mb-0">{{ dev_profile.first_name }}&nbsp;{{ dev_profile.middle_name }}.&nbsp{{ dev_profile.last_name }}</p>
                             </div>
                         </div>
                         <hr>
@@ -141,7 +141,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">joemar.greta16@gmail.com</p>
+                                <p class="text-muted mb-0">{{ dev_profile.email }}</p>
                             </div>
                         </div>
                         <hr>
@@ -150,7 +150,7 @@
                                 <p class="mb-0">Phone</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">N/A</p>
+                                <p class="text-muted mb-0">{{ dev_profile.phone }}</p>
                             </div>
                         </div>
                         <hr>
@@ -159,7 +159,7 @@
                                 <p class="mb-0">Mobile</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">(+63)9452209284</p>
+                                <p class="text-muted mb-0">{{ dev_profile.mobile }}</p>
                             </div>
                         </div>
                         <hr>
@@ -168,7 +168,7 @@
                                 <p class="mb-0">Address</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">Balintawak Quezon City, Philippines</p>
+                                <p class="text-muted mb-0">{{ dev_profile.address }}</p>
                             </div>
                         </div>
                     </div>
@@ -186,23 +186,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for educ in dev_edu_background %}
                                 <tr>
-                                    <td class="text-muted">Tertiary</td>
-                                    <td class="text-muted">2017-2021</td>
-                                    <td class="text-muted">STI College Munoz EDSA</td>
+                                    <td class="text-muted">{{ educ.level }}</td>
+                                    <td class="text-muted">{{ educ.inclusive_date }}</td>
+                                    <td class="text-muted">{{ educ.school_or_institution }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td class="text-muted">Secondary</td>
-                                    <td class="text-muted">2004-2008</td>
-                                    <td class="text-muted">San Jose High School</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-muted">Primary</td>
-                                    <td class="text-muted">1998-2004</td>
-                                    <td class="text-muted">Bonifacio Memorial Elementary School</td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -220,29 +210,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for exp in dev_pro %}
                                 <tr>
-                                    <td class="text-muted">October 31, 2019</td>
-                                    <td class="text-muted">Participant</td>
-                                    <td class="text-muted">Impact Hackathon2050(Smart Araneta)</td>
+                                    <td class="text-muted">{{ exp.inclusive_date }}</td>
+                                    <td class="text-muted">{{ exp.exp_or_job_title }}</td>
+                                    <td class="text-muted">{{ exp.company_or_organization }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td class="text-muted">November of 2019</td>
-                                    <td class="text-muted">Participant</td>
-                                    <td class="text-muted">CodeFest2019</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-muted">2019</td>
-                                    <td class="text-muted">Participant</td>
-                                    <td class="text-muted">HomeCredit</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-muted">2019</td>
-                                    <td class="text-muted">Participant</td>
-                                    <td class="text-muted">HackaTax</td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -259,30 +233,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for attended in dev_attended %}
                                 <tr>
-                                    <td class="text-muted">October 31, 2019</td>
-                                    <td class="text-muted">Impact Hackathon2050(Smart Araneta)</td>
+                                    <td class="text-muted">{{ attended.inclusive_date }}</td>
+                                    <td class="text-muted">{{ attended.training_seminar_workshop_attended }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td class="text-muted">2021</td>
-                                    <td class="text-muted">HCIA - 5G Course</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-muted">2021</td>
-                                    <td class="text-muted">5G Overview - Mobile Communication Evolution</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-muted">2021</td>
-                                    <td class="text-muted">HCIA - Cloud Computing Course</td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-muted">2021</td>
-                                    <td class="text-muted">HCIA - IoT</td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
