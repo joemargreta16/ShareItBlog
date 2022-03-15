@@ -30,8 +30,6 @@ class Post(models.Model):
         default='default/default_blog_post_img1.png', upload_to='thumbnails/', blank=True, null=True)
     image_url = models.CharField(
         default=None, max_length=500, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
     content = RichTextField()
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
@@ -39,6 +37,9 @@ class Post(models.Model):
     hit_count_generic = GenericRelation(
         HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
     tags = TaggableManager()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -63,6 +64,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     parent = models.ForeignKey(
         'self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -16,13 +16,13 @@
                         <h5 class="my-3">{{ dev_profile.first_name }}&nbsp;{{ dev_profile.middle_name|slice:'1' }}.&nbsp{{ dev_profile.last_name }}</h5>
                         <p class="text-muted mb-1">{{ dev_profile.job_title }}</p>
                         <p class="text-muted mb-4">{{ dev_profile.address }}</p>
-                        <div class="d-flex justify-content-center mb-2">
+                        <!-- <div class="d-flex justify-content-center mb-2">
                             <button type="button" class="btn btn-primary">Follow</button>
                             <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-
+                <!-- Sites -->
                 <div class="card mb-4 mb-lg-0">
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush rounded-3">
@@ -41,92 +41,39 @@
                         </ul>
                     </div>
                 </div>
-
+                <!-- Language -->
                 <div class="card mt-4 mb-lg-0">
                     <div class="card-body">
                         <p class="mb-4"><span class="text-primary font-italic me-1">Language</span>&nbsp;Spoken</p>
-                        <p class="mb-1" style="font-size: .77rem;">Bisaya</p>
+                        {% for dev_lang in dev_language %}
+                        <p class="mb-1" style="font-size: .77rem;">{{ dev_lang.language }}</p>
                         <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 8%" aria-valuenow="8"
+                            <div class="progress-bar" role="progressbar" style="width: {{ dev_lang.language_percentage }}%" aria-valuenow="{{ dev_lang.language_percentage }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">Tagalog</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 96%" aria-valuenow="96"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">English</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
-
+                <!-- Skills -->
                 <div class="card mt-4 mb-lg-0">
                     <div class="card-body">
                         <p class="mb-4"><span class="text-primary font-italic me-1">Skills</span>&nbsp;Acquired</p>
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">C#</p>
+                        {% for dev_skills in dev_skillset %}
+                        <p class="mt-4 mb-1" style="font-size: .77rem;">{{ dev_skills.skill }}</p>
                         <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45"
+                            <div class="progress-bar" role="progressbar" style="width: {{ dev_skills.skill_percentage }}%" aria-valuenow="{{ dev_skills.skill_percentage }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">Django</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">JAVA/p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">MS Excel</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">MS Powerpoint</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">MS Word</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">MySQL</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">PostgreSQL</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <p class="mt-4 mb-1" style="font-size: .77rem;">Python</p>
-                        <div class="progress rounded" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>                 
+                        {% endfor %}               
                     </div>
                 </div>
             </div>
-
+            <!-- >Developer's Profile Info -->
             <div class="col-lg-8">
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="mb-3 text-uppercase">Developer's Profile Info</h3>
+                        <hr>
                         <div class="row">
                             <div class="col-sm-3">
                                 <p class="mb-0">Full Name</p>
@@ -173,7 +120,15 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Bio -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="mb-3 text-uppercase">About me</h3>
+                        <hr>
+                        <p class="mb3">{{ dev_profile.bio }}</p>
+                    </div>
+                </div>
+                <!-- Educational Background -->
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="mb-3 text-uppercase">Educational Background</h3>
@@ -197,7 +152,7 @@
                         </table>
                     </div>
                 </div>
-
+                <!-- Professional/Volunteer Experience -->
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="mb-3 text-uppercase">Professional/Volunteer Experience</h3>
@@ -221,7 +176,7 @@
                         </table>
                     </div>
                 </div>
-
+                <!-- Trainings, Seminar/Workshop Attended -->
                 <div class="card mb-4">
                     <div class="card-body">
                         <h3 class="mb-3 text-uppercase">Trainings, Seminar/Workshop Attended</h3>
@@ -244,8 +199,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-
+                <!-- <div class="row">
                     <div class="col-md-6">
                         <div class="card mb-4 mb-md-0">
                             <div class="card-body">
@@ -278,7 +232,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

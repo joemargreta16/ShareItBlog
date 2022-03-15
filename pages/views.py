@@ -1,5 +1,5 @@
 from .forms import UpdateProfilePageForm, UpdateUserPageForm, ChangePasswordForm
-from .models import DevEduBackground, DevProfessionalVolunteerEXP, DevProfile, DevTrainingsSeminarsWorkshopAttended,Profile
+from .models import DevEduBackground, DevLanguages, DevProfessionalVolunteerEXP, DevProfile, DevSkills, DevTrainingsSeminarsWorkshopAttended, Profile
 from blog.models import Comment, User
 from blog.views import Post, Category
 from django.contrib import messages
@@ -13,23 +13,22 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 
 
-
 # Create your views here.
 def home(request):
     posts = Post.objects.all()
     categories = Category.objects.all()
-    popular_posts = Post.objects.order_by( 'hit_count_generic' )[:4]
+    popular_posts = Post.objects.order_by('hit_count_generic')[:4]
 
-    popular_posts_head = Post.objects.order_by( 'hit_count_generic' )[:1]
+    popular_posts_head = Post.objects.order_by('hit_count_generic')[:1]
 
-    page = request.GET.get( 'page' )
-    paginator = Paginator( posts, 9 )
+    page = request.GET.get('page')
+    paginator = Paginator(posts, 9)
     try:
-        posts = paginator.page( page )
+        posts = paginator.page(page)
     except PageNotAnInteger:
-        posts = paginator.page( 1 )
+        posts = paginator.page(1)
     except EmptyPage:
-        posts = paginator.page( paginator.num_pages )
+        posts = paginator.page(paginator.num_pages)
 
     context = {
         'posts': posts,
@@ -37,25 +36,26 @@ def home(request):
         'popular_posts': popular_posts,
         'popular_posts_head': popular_posts_head,
     }
-    return render( request, 'blog/blog.html', context )
+    return render(request, 'blog/blog.html', context)
+
 
 @login_required
 def author_profiles(request, id):
-    author_profile_page = get_object_or_404(Post, pk=id )
-    profile = Profile.objects.get( user=id )
-    posts = Post.objects.filter( author=id )
-    posts_count = Post.objects.filter( author=id ).count()
-    comment_count = Comment.objects.filter( user=id ).count()
-    
-    page = request.GET.get( 'page' )
-    paginator = Paginator( posts, 8 )
+    author_profile_page = get_object_or_404(Post, pk=id)
+    profile = Profile.objects.get(user=id)
+    posts = Post.objects.filter(author=id)
+    posts_count = Post.objects.filter(author=id).count()
+    comment_count = Comment.objects.filter(user=id).count()
+
+    page = request.GET.get('page')
+    paginator = Paginator(posts, 8)
     try:
-        posts = paginator.page( page )
+        posts = paginator.page(page)
     except PageNotAnInteger:
-        posts = paginator.page( 1 )
+        posts = paginator.page(1)
     except EmptyPage:
-        posts = paginator.page( paginator.num_pages )
-    
+        posts = paginator.page(paginator.num_pages)
+
     context = {
         'author_profile_page': author_profile_page,
         'profile': profile,
@@ -64,24 +64,25 @@ def author_profiles(request, id):
         'comment_count': comment_count,
         'page': page,
     }
-    
-    return render( request, 'pages/author_profile.html', context )
+
+    return render(request, 'pages/author_profile.html', context)
+
 
 @login_required
 def my_profile(request):
-    profile = Profile.objects.get( user=request.user )
-    posts = Post.objects.filter( author=request.user )
-    posts_count = Post.objects.filter( author=request.user ).count()
-    comment_count = Comment.objects.filter( user=request.user ).count()
+    profile = Profile.objects.get(user=request.user)
+    posts = Post.objects.filter(author=request.user)
+    posts_count = Post.objects.filter(author=request.user).count()
+    comment_count = Comment.objects.filter(user=request.user).count()
 
-    page = request.GET.get( 'page' )
-    paginator = Paginator( posts, 8 )
+    page = request.GET.get('page')
+    paginator = Paginator(posts, 8)
     try:
-        posts = paginator.page( page )
+        posts = paginator.page(page)
     except PageNotAnInteger:
-        posts = paginator.page( 1 )
+        posts = paginator.page(1)
     except EmptyPage:
-        posts = paginator.page( paginator.num_pages )
+        posts = paginator.page(paginator.num_pages)
 
     context = {
         'profile': profile,
@@ -90,28 +91,32 @@ def my_profile(request):
         'comment_count': comment_count,
         'page': page,
     }
-    return render( request, 'pages/my_profile.html', context )
+    return render(request, 'pages/my_profile.html', context)
+
 
 def password_success(request):
-    return render( request, 'pages/password_success.html' )
+    return render(request, 'pages/password_success.html')
+
 
 def portfolio(request):
-    return render( request, 'pages/portfolio.html' )
+    return render(request, 'pages/portfolio.html')
+
 
 @login_required
 def update_profile(request):
-    profile = Profile.objects.get( user=request.user )
-    u_form = UpdateUserPageForm( request.POST or None, instance=request.user )
-    p_form = UpdateProfilePageForm( request.POST or None, request.FILES or None, instance=profile )
-    
+    profile = Profile.objects.get(user=request.user)
+    u_form = UpdateUserPageForm(request.POST or None, instance=request.user)
+    p_form = UpdateProfilePageForm(
+        request.POST or None, request.FILES or None, instance=profile)
+
     success = False
     failed = False
-    
+
     if request.method == 'POST':
         if u_form.is_valid() and p_form.is_valid():
             if User.objects.filter(email=request.user.email).exists():
                 failed = True
-            
+
             else:
                 u_form.save()
                 p_form.save()
@@ -124,19 +129,23 @@ def update_profile(request):
         'success': success,
         'failed': failed,
     }
-    return render( request, 'pages/myprofile_edit_form.html', context )
+    return render(request, 'pages/myprofile_edit_form.html', context)
 
-class ChangePassword( PasswordChangeView ):
+
+class ChangePassword(PasswordChangeView):
     form_class = ChangePasswordForm
-    success_url = reverse_lazy( 'pages:password_success' )
-    
+    success_url = reverse_lazy('pages:password_success')
+
+
 class DevProfileView(TemplateView):
     template_name = 'pages/portfolio.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['dev_profile'] = DevProfile.objects.first()
         context['dev_edu_background'] = DevEduBackground.objects.all()
+        context['dev_language'] = DevLanguages.objects.all()
         context['dev_pro'] = DevProfessionalVolunteerEXP.objects.all()
+        context['dev_skillset'] = DevSkills.objects.all()
         context['dev_attended'] = DevTrainingsSeminarsWorkshopAttended.objects.all()
         return context
