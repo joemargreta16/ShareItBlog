@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn shareItBlog.wsgi --log-file -
+web: python manage.py migrate && gunicorn shareItBlog.wsgi
