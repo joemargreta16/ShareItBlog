@@ -24,7 +24,7 @@ AWS_LOCATION = 'static'
 AWS_QUERYSTRING_AUTH = False
 
 AWS_HEADERS = {
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
 }
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3BOTO3STORAGE'
