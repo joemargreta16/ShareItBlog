@@ -21,9 +21,6 @@ INSTALLED_APPS = [
     # apps shareItBlog
     'blog',
     'pages',
-    
-    # aws s3
-    'storages',
 
     # ckeditor
     'ckeditor',
